@@ -12,6 +12,7 @@
   set_fact:
     kata_containers_templates:
       - { name: runtimeclass-kata-qemu, file: runtimeclass-kata-qemu.yml, type: runtimeclass }
+      - { name: runtimeclass-kata-fc, file: runtimeclass-kata-fc.yml, type: runtimeclass }
 
 - name: Kata Containers | Create manifests
   template:

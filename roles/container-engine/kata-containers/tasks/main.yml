@@ -17,6 +17,7 @@
     dest: "{{ kata_containers_config_dir }}/{{ item }}"
   with_items:
     - configuration-qemu.toml
+    - configuration-fc.toml
 
 - name: Set containerd bin
   vars:
@@ -27,3 +28,4 @@
     mode: 0755
   with_items:
     - qemu
+    - fc
