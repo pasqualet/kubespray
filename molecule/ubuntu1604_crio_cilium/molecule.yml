@@ -51,7 +51,7 @@ provisioner:
       all:
         ansible_become_password: vagrant
         container_runtime: crio
-        kube_network_plugin: crio
+        kube_network_plugin: cilium
 verifier:
   name: ansible
   lint: |

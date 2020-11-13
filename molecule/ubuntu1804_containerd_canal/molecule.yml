@@ -51,7 +51,7 @@ provisioner:
       all:
         ansible_become_password: vagrant
         container_runtime: containerd
-        kube_network_plugin: containerd
+        kube_network_plugin: canal
 verifier:
   name: ansible
   lint: |

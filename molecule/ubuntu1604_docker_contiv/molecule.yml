@@ -51,7 +51,7 @@ provisioner:
       all:
         ansible_become_password: vagrant
         container_runtime: docker
-        kube_network_plugin: docker
+        kube_network_plugin: contiv
 verifier:
   name: ansible
   lint: |

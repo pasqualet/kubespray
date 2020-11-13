@@ -3,6 +3,9 @@
 - name: Generate scenarios
   hosts: localhost
   vars:
+    vm:
+      cpu: 2
+      memory: 2048
     os:
       - name: ubuntu1604
         box: generic/ubuntu1604
@@ -72,8 +75,8 @@
           platforms:
             - name: master-0
               box: {{ item[0].box }}
-              cpus: 2
-              memory: 2048
+              cpus: {{ vm.cpu }}
+              memory: {{ vm.memory }}
               groups:
                 - kube-master
                 - kube-node
@@ -81,8 +84,8 @@
                 - k8s-cluster
             - name: master-1
               box: {{ item[0].box }}
-              cpus: 2
-              memory: 2048
+              cpus: {{ vm.cpu }}
+              memory: {{ vm.memory }}
               groups:
                 - kube-master
                 - kube-node
@@ -90,8 +93,8 @@
                 - k8s-cluster
             - name: master-2
               box: {{ item[0].box }}
-              cpus: 2
-              memory: 2048
+              cpus: {{ vm.cpu }}
+              memory: {{ vm.memory }}
               groups:
                 - kube-master
                 - kube-node
@@ -115,7 +118,7 @@
                 all:
                   ansible_become_password: vagrant
                   container_runtime: {{ item[1] }}
-                  kube_network_plugin: {{ item[1] }}
+                  kube_network_plugin: {{ item[2] }}
           verifier:
             name: ansible
             lint: |
