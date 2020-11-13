@@ -9,8 +9,8 @@ driver:
       #  set -e
       #  yamllint -c ../../../.yamllint .
 platforms:
-  - name: ubuntu18-0
-    box: generic/ubuntu1804
+  - name: centos8-0
+    box: centos/8
     cpus: 2
     memory: 2048
     nested: true
@@ -19,8 +19,8 @@ platforms:
       - kube-node
       - etcd
       - k8s-cluster
-  - name: ubuntu18-1
-    box: generic/ubuntu1804
+  - name: centos8-1
+    box: centos/8
     cpus: 2
     memory: 2048
     nested: true
@@ -29,8 +29,8 @@ platforms:
       - kube-node
       - etcd
       - k8s-cluster
-  - name: ubuntu18-2
-    box: generic/ubuntu1804
+  - name: centos8-2
+    box: centos/8
     cpus: 2
     memory: 2048
     nested: true
@@ -56,17 +56,11 @@ provisioner:
     group_vars:
       all:
         ansible_become_password: vagrant
-        kube_network_plugin: cilium
 verifier:
   name: ansible
   lint: |
     set -e
     yamllint -c ../../../.yamllint .
-  inventory:
-    group_vars:
-      all:
-        ansible_become_password: vagrant
-        kube_network_plugin: cilium
 scenario:
   test_sequence:
     - dependency

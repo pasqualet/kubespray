@@ -9,7 +9,7 @@ driver:
       #  set -e
       #  yamllint -c ../../../.yamllint .
 platforms:
-  - name: ubuntu18-0
+  - name: master-0
     box: generic/ubuntu1804
     cpus: 2
     memory: 2048
@@ -19,7 +19,7 @@ platforms:
       - kube-node
       - etcd
       - k8s-cluster
-  - name: ubuntu18-1
+  - name: master-1
     box: generic/ubuntu1804
     cpus: 2
     memory: 2048
@@ -29,7 +29,7 @@ platforms:
       - kube-node
       - etcd
       - k8s-cluster
-  - name: ubuntu18-2
+  - name: master-2
     box: generic/ubuntu1804
     cpus: 2
     memory: 2048
@@ -56,7 +56,6 @@ provisioner:
     group_vars:
       all:
         ansible_become_password: vagrant
-        kube_network_plugin: contiv
 verifier:
   name: ansible
   lint: |
