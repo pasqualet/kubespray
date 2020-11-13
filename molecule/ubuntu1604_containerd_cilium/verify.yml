@@ -1,0 +1,5 @@
+---
+- import_playbook: ../common/verify.yml
+  vars:
+    container_manager: containerd
+    kube_network_plugin: cilium
