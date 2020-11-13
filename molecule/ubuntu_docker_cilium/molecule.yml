@@ -56,11 +56,17 @@ provisioner:
     group_vars:
       all:
         ansible_become_password: vagrant
+        kube_network_plugin: cilium
 verifier:
   name: ansible
   lint: |
     set -e
     yamllint -c ../../../.yamllint .
+  inventory:
+    group_vars:
+      all:
+        ansible_become_password: vagrant
+        kube_network_plugin: cilium
 scenario:
   test_sequence:
     - dependency
