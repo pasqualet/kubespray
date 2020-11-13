@@ -1,0 +1,61 @@
+---
+- name: Verify
+  hosts: all
+  vars:
+    daemonsets:
+      - namespace: kube-system
+        name: calico-node
+        ready: 1
+      - namespace: kube-system
+        name: kube-proxy
+        ready: 1
+      - namespace: kube-system
+        name: nodelocaldns
+        ready: 1
+    deployments:
+      - namespace: kube-system
+        name: dns-autoscaler
+        replicas: 1
+        ready_replicas: 1
+      - namespace: kube-system
+        name: coredns
+        replicas: 2
+        ready_replicas: 1
+      - namespace: kube-system
+        name: calico-kube-controllers
+        replicas: 1
+        ready_replicas: 1
+  tasks:
+    - name: Get service facts
+      service_facts:
+
+    - name: Check services
+      with_items:
+        - etcd
+        - docker
+        - kubelet
+      assert:
+        that:
+          - ansible_facts.services["{{ item }}.service"].status == "enabled"
+          - ansible_facts.services["{{ item }}.service"].state == "running"
+
+    - name: Get nodes count
+      shell: kubectl get nodes -o name | wc -l
+      register: nodes_count
+      changed_when: false
+
+    - name: Assert nodes count
+      assert:
+        that:
+          - nodes_count.stdout == "1"
+
+    - name: Check deployments replicas
+      shell: kubectl -n {{ item.namespace }} get deployment {{ item.name }} -o 'go-template={{ "{{" }}.status.readyReplicas{{ "}}" }}/{{ "{{" }}.status.replicas{{ "}}" }}' | grep {{ item.ready_replicas }}/{{ item.replicas }}
+      with_items: "{{ deployments }}"
+      changed_when: false
+
+
+    - name: Check daemonsets
+      shell: kubectl -n {{ item.namespace }} get daemonset {{ item.name }} -o 'go-template={{ "{{" }}.status.numberReady{{ "}}" }}' | grep {{ item.ready }}
+      with_items: "{{ daemonsets }}"
+      changed_when: false
