@@ -13,6 +13,10 @@
         box: generic/ubuntu1804
       - name: ubuntu2004
         box: generic/ubuntu2004
+      - name: centos7
+        box: centos/7
+      - name: centos8
+        box: centos/8
     runtimes:
       - docker
       - containerd
@@ -117,8 +121,12 @@
               group_vars:
                 all:
                   ansible_become_password: vagrant
-                  container_runtime: {{ item[1] }}
+                  container_manager: {{ item[1] }}
                   kube_network_plugin: {{ item[2] }}
+                  {% if item[1] != "docker" -%}
+                  etcd_deployment_type: host
+                  {% endif %}
+
           verifier:
             name: ansible
             lint: |

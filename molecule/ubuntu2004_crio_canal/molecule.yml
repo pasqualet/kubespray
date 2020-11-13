@@ -50,8 +50,10 @@ provisioner:
     group_vars:
       all:
         ansible_become_password: vagrant
-        container_runtime: crio
+        container_manager: crio
         kube_network_plugin: canal
+        etcd_deployment_type: host
+        
 verifier:
   name: ansible
   lint: |

@@ -8,6 +8,10 @@
     runtime_services:
       docker:
         - docker
+      containerd:
+        - containerd
+      crio:
+        - crio
   tasks:
     - name: Get service facts
       service_facts:
@@ -30,6 +34,7 @@
 - name: Verify Kubernetes
   hosts: kube-master[0]
   vars:
+    kubectl_args: --kubeconfig /etc/kubernetes/admin.conf
     k8s_daemonsets:
       - namespace: kube-system
         name: kube-proxy
@@ -78,7 +83,7 @@
     node_counts: 3
   tasks:
     - name: Get nodes count
-      shell: kubectl get nodes -o name | wc -l
+      shell: /usr/local/bin/kubectl {{ kubectl_args }} get nodes -o name | wc -l
       register: nodes_count
       changed_when: false
 
@@ -88,28 +93,28 @@
           - nodes_count.stdout == "{{ node_counts }}"
 
     - name: Check Kubernetes deployments replicas
-      shell: kubectl -n {{ item.namespace }} get deployment {{ item.name }} -o 'go-template={{ "{{" }}.status.readyReplicas{{ "}}" }}/{{ "{{" }}.status.replicas{{ "}}" }}' | grep {{ item.ready_replicas }}/{{ item.replicas }}
+      shell: /usr/local/bin/kubectl {{ kubectl_args }} -n {{ item.namespace }} get deployment {{ item.name }} -o 'go-template={{ "{{" }}.status.readyReplicas{{ "}}" }}/{{ "{{" }}.status.replicas{{ "}}" }}' | grep {{ item.ready_replicas }}/{{ item.replicas }}
       with_items: "{{ k8s_deployments }}"
       changed_when: false
 
     - name: Check Kubernetes daemonsets
-      shell: kubectl -n {{ item.namespace }} get daemonset {{ item.name }} -o 'go-template={{ "{{" }}.status.numberReady{{ "}}" }}' | grep {{ item.ready }}
+      shell: /usr/local/bin/kubectl {{ kubectl_args }} -n {{ item.namespace }} get daemonset {{ item.name }} -o 'go-template={{ "{{" }}.status.numberReady{{ "}}" }}' | grep {{ item.ready }}
       with_items: "{{ k8s_daemonsets }}"
       changed_when: false
 
     - name: Check network deployments replicas
-      shell: kubectl -n {{ item.namespace }} get deployment {{ item.name }} -o 'go-template={{ "{{" }}.status.readyReplicas{{ "}}" }}/{{ "{{" }}.status.replicas{{ "}}" }}' | grep {{ item.ready_replicas }}/{{ item.replicas }}
+      shell: /usr/local/bin/kubectl {{ kubectl_args }} -n {{ item.namespace }} get deployment {{ item.name }} -o 'go-template={{ "{{" }}.status.readyReplicas{{ "}}" }}/{{ "{{" }}.status.replicas{{ "}}" }}' | grep {{ item.ready_replicas }}/{{ item.replicas }}
       with_items: "{{ network_deployments[kube_network_plugin] }}"
       changed_when: false
 
     - name: Check network daemonsets
-      shell: kubectl -n {{ item.namespace }} get daemonset {{ item.name }} -o 'go-template={{ "{{" }}.status.numberReady{{ "}}" }}' | grep {{ item.ready }}
+      shell: /usr/local/bin/kubectl {{ kubectl_args }} -n {{ item.namespace }} get daemonset {{ item.name }} -o 'go-template={{ "{{" }}.status.numberReady{{ "}}" }}' | grep {{ item.ready }}
       with_items: "{{ network_daemonsets[kube_network_plugin] }}"
       changed_when: false
 
 
     - name: Run job
-      command: kubectl create job test --image hello-world
+      command: /usr/local/bin/kubectl {{ kubectl_args }} create job test --image hello-world
       register: run_job
 
     - name: Job is created
@@ -119,7 +124,7 @@
           - run_job.stdout == "job.batch/test created"
 
     - name: Job is completed
-      command: kubectl wait --for=condition=complete job/test
+      command: /usr/local/bin/kubectl {{ kubectl_args }} wait --for=condition=complete job/test
 
     - name: Delete job
-      command: kubectl delete job test
+      command: /usr/local/bin/kubectl {{ kubectl_args }} delete job test

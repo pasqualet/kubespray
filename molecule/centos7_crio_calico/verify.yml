@@ -1,0 +1,5 @@
+---
+- import_playbook: ../common/verify.yml
+  vars:
+    container_manager: crio
+    kube_network_plugin: calico

@@ -1,0 +1,75 @@
+---
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+    options:
+      driver: kvm
+platforms:
+  - name: master-0
+    box: centos/8
+    cpus: 2
+    memory: 2048
+    groups:
+      - kube-master
+      - kube-node
+      - etcd
+      - k8s-cluster
+  - name: master-1
+    box: centos/8
+    cpus: 2
+    memory: 2048
+    groups:
+      - kube-master
+      - kube-node
+      - etcd
+      - k8s-cluster
+  - name: master-2
+    box: centos/8
+    cpus: 2
+    memory: 2048
+    groups:
+      - kube-master
+      - kube-node
+      - etcd
+      - k8s-cluster
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../../../
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks
+  lint:
+    name: ansible-lint
+    options:
+      c: ../../../.ansible-lint
+  ansible_args:
+    - --become
+  inventory:
+    group_vars:
+      all:
+        ansible_become_password: vagrant
+        container_manager: containerd
+        kube_network_plugin: canal
+        etcd_deployment_type: host
+        
+verifier:
+  name: ansible
+  lint: |
+    set -e
+    yamllint -c ../../../.yamllint .
+scenario:
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
