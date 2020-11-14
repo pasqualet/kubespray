@@ -27,6 +27,23 @@
       - cilium
       - contiv
   tasks:
+    - name: Create gitlabci
+      copy:
+        dest: .gitlab-ci.yaml
+        content: |
+          ---
+          {% for os_item in os %}
+            {% for runtime in runtimes %}
+              {% for net in networking %}
+
+          integration_tests_{{ os_item.name }}_{{ runtime }}_{{ net }}:
+            script:
+              - cd molecule && molecule test -s {{ os_item.name }}
+
+              {% endfor %}
+            {% endfor %}
+          {% endfor %}
+
     - name: Create scenario directory
       with_nested:
         - "{{ os }}"
