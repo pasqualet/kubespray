@@ -1,0 +1,362 @@
+---
+      
+integration_tests_ubuntu1604_docker_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_docker_calico --parallel
+
+    
+integration_tests_ubuntu1604_docker_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_docker_canal --parallel
+
+    
+integration_tests_ubuntu1604_docker_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_docker_cilium --parallel
+
+    
+integration_tests_ubuntu1604_docker_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_docker_contiv --parallel
+
+          
+integration_tests_ubuntu1604_containerd_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_containerd_calico --parallel
+
+    
+integration_tests_ubuntu1604_containerd_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_containerd_canal --parallel
+
+    
+integration_tests_ubuntu1604_containerd_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_containerd_cilium --parallel
+
+    
+integration_tests_ubuntu1604_containerd_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_containerd_contiv --parallel
+
+          
+integration_tests_ubuntu1604_crio_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_crio_calico --parallel
+
+    
+integration_tests_ubuntu1604_crio_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_crio_canal --parallel
+
+    
+integration_tests_ubuntu1604_crio_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_crio_cilium --parallel
+
+    
+integration_tests_ubuntu1604_crio_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1604_crio_contiv --parallel
+
+            
+integration_tests_ubuntu1804_docker_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_docker_calico --parallel
+
+    
+integration_tests_ubuntu1804_docker_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_docker_canal --parallel
+
+    
+integration_tests_ubuntu1804_docker_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_docker_cilium --parallel
+
+    
+integration_tests_ubuntu1804_docker_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_docker_contiv --parallel
+
+          
+integration_tests_ubuntu1804_containerd_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_containerd_calico --parallel
+
+    
+integration_tests_ubuntu1804_containerd_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_containerd_canal --parallel
+
+    
+integration_tests_ubuntu1804_containerd_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_containerd_cilium --parallel
+
+    
+integration_tests_ubuntu1804_containerd_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_containerd_contiv --parallel
+
+          
+integration_tests_ubuntu1804_crio_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_crio_calico --parallel
+
+    
+integration_tests_ubuntu1804_crio_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_crio_canal --parallel
+
+    
+integration_tests_ubuntu1804_crio_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_crio_cilium --parallel
+
+    
+integration_tests_ubuntu1804_crio_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu1804_crio_contiv --parallel
+
+            
+integration_tests_ubuntu2004_docker_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_docker_calico --parallel
+
+    
+integration_tests_ubuntu2004_docker_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_docker_canal --parallel
+
+    
+integration_tests_ubuntu2004_docker_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_docker_cilium --parallel
+
+    
+integration_tests_ubuntu2004_docker_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_docker_contiv --parallel
+
+          
+integration_tests_ubuntu2004_containerd_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_containerd_calico --parallel
+
+    
+integration_tests_ubuntu2004_containerd_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_containerd_canal --parallel
+
+    
+integration_tests_ubuntu2004_containerd_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_containerd_cilium --parallel
+
+    
+integration_tests_ubuntu2004_containerd_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_containerd_contiv --parallel
+
+          
+integration_tests_ubuntu2004_crio_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_crio_calico --parallel
+
+    
+integration_tests_ubuntu2004_crio_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_crio_canal --parallel
+
+    
+integration_tests_ubuntu2004_crio_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_crio_cilium --parallel
+
+    
+integration_tests_ubuntu2004_crio_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s ubuntu2004_crio_contiv --parallel
+
+            
+integration_tests_centos7_docker_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_docker_calico --parallel
+
+    
+integration_tests_centos7_docker_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_docker_canal --parallel
+
+    
+integration_tests_centos7_docker_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_docker_cilium --parallel
+
+    
+integration_tests_centos7_docker_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_docker_contiv --parallel
+
+          
+integration_tests_centos7_containerd_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_containerd_calico --parallel
+
+    
+integration_tests_centos7_containerd_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_containerd_canal --parallel
+
+    
+integration_tests_centos7_containerd_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_containerd_cilium --parallel
+
+    
+integration_tests_centos7_containerd_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_containerd_contiv --parallel
+
+          
+integration_tests_centos7_crio_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_crio_calico --parallel
+
+    
+integration_tests_centos7_crio_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_crio_canal --parallel
+
+    
+integration_tests_centos7_crio_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_crio_cilium --parallel
+
+    
+integration_tests_centos7_crio_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos7_crio_contiv --parallel
+
+            
+integration_tests_centos8_docker_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_docker_calico --parallel
+
+    
+integration_tests_centos8_docker_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_docker_canal --parallel
+
+    
+integration_tests_centos8_docker_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_docker_cilium --parallel
+
+    
+integration_tests_centos8_docker_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_docker_contiv --parallel
+
+          
+integration_tests_centos8_containerd_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_containerd_calico --parallel
+
+    
+integration_tests_centos8_containerd_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_containerd_canal --parallel
+
+    
+integration_tests_centos8_containerd_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_containerd_cilium --parallel
+
+    
+integration_tests_centos8_containerd_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_containerd_contiv --parallel
+
+          
+integration_tests_centos8_crio_calico:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_crio_calico --parallel
+
+    
+integration_tests_centos8_crio_canal:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_crio_canal --parallel
+
+    
+integration_tests_centos8_crio_cilium:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_crio_cilium --parallel
+
+    
+integration_tests_centos8_crio_contiv:
+  stage: unit-tests
+  script:
+    - molecule test -s centos8_crio_contiv --parallel
+
+      

@@ -29,7 +29,7 @@
   tasks:
     - name: Create gitlabci
       copy:
-        dest: .gitlab-ci.yaml
+        dest: .gitlab-ci.yml
         content: |
           ---
           {% for os_item in os %}
@@ -37,8 +37,9 @@
               {% for net in networking %}
 
           integration_tests_{{ os_item.name }}_{{ runtime }}_{{ net }}:
+            stage: unit-tests
             script:
-              - cd molecule && molecule test -s {{ os_item.name }}
+              - molecule test -s {{ os_item.name }}_{{ runtime }}_{{ net }} --parallel
 
               {% endfor %}
             {% endfor %}
